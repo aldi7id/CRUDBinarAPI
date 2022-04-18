@@ -1,5 +1,6 @@
 package com.ajgroup.crudbinarapi
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ajgroup.crudbinarapi.databinding.ActivityMainBinding
@@ -10,5 +11,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.signup.setOnClickListener{
+            startActivity(Intent(this@MainActivity,RegisterActivity::class.java))
+        }
     }
 }

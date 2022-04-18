@@ -22,7 +22,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.apply {
             btnRegister.setOnClickListener {
                 if (!etEmail.text.isNullOrEmpty()&& !etPassword.text.isNullOrEmpty()){
-                    registerAction(etEmail.text.toString(), etPassword.text.toString(), etUsername.text.toString())
+                    registerAction(etEmail.text.toString(), etUsername.text.toString(), etPassword.text.toString())
                 } else {
                     Toast.makeText(this@RegisterActivity, "Data Tidak Boleh Kosong", Toast.LENGTH_SHORT).show()
                 }
