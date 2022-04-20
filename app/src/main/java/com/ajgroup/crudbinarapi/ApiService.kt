@@ -9,5 +9,5 @@ interface ApiService {
     fun postUser(@Body request: RegisterRequest): Call<RegisterResponse>
 
     @POST("/api/v1/auth/login")
-    fun postLogin (@Body request: LoginRequest) : Call<LoginRequest>
+    fun postLogin (@Body request: LoginRequest) : Call<LoginResponse>
 }

@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
                     response: Response<RegisterResponse>
                 ) {
                     val code = response.code()
-                    if (code == 200){
+                    if (code == 201){
                         binding.pbLoading.visibility = View.GONE
                         Toast.makeText(this@RegisterActivity, "Registrasi Berhasil", Toast.LENGTH_SHORT).show()
                         finish()
