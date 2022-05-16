@@ -36,7 +36,7 @@ class RegisterActivity : AppCompatActivity() {
         username = username,
         password = password
     )
-        ApiClient.instace.postUser(request)
+        ApiClient.getInstance(applicationContext).postUser(request)
             .enqueue(object : Callback<RegisterResponse> {
                 override fun onResponse(
                     call: Call<RegisterResponse>,

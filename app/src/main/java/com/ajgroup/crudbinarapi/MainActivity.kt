@@ -1,5 +1,6 @@
 package com.ajgroup.crudbinarapi
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +13,17 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    init {
+        instance = this
+    }
+
+    companion object {
+        private var instance: MainActivity? = null
+
+        fun applicationContext() : Context {
+            return instance!!.applicationContext
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -40,18 +52,20 @@ class MainActivity : AppCompatActivity() {
             email = username,
             password = password
         )
-        ApiClient.instace.postLogin(request)
+        ApiClient.getInstance(applicationContext).postLogin(request)
             .enqueue(object: Callback<LoginResponse>
             {
                 override fun onResponse(
                     call: Call<LoginResponse>,
                     response: Response<LoginResponse>
                 ) {
+                    val body = response.body()
                     val code = response.code()
                     if (code == 200) {
+                        body?.datax?.let { showList(it) }
                         binding.pbLoading.visibility = View.GONE
                         Toast.makeText(this@MainActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@MainActivity,ProfileActivity::class.java))
+
 
                     }
                 }
@@ -62,5 +76,11 @@ class MainActivity : AppCompatActivity() {
 
             }
             )
+    }
+
+    private fun showList(datax: DataX) {
+        val intent = Intent(this@MainActivity,ProfileActivity::class.java)
+        intent.putExtra(ProfileActivity.TOKEN, datax.token)
+        startActivity(intent)
     }
 }
